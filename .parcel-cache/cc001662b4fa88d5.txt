@@ -6270,7 +6270,7 @@
 108/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/lodash.memoize/index.js1471109594000000000 0
 108/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/lodash/isArrayBuffer.js499162500000000000 0
 105/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/@parcel/hash/LICENSE499162500000000000 0
-76/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/dist1632051481328462731 1
+76/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/dist1632051709298068311 1
 150/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/hash-base/node_modules/readable-stream/lib/_stream_passthrough.js499162500000000000 0
 122/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/core-js/internals/typed-array-from.js499162500000000000 0
 118/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/caniuse-lite/data/features/u2f.js499162500000000000 0
@@ -6314,7 +6314,7 @@
 119/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/caniuse-lite/data/features/json.js499162500000000000 0
 136/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/@swc/helpers/src/_class_private_field_loose_base.js1628737650000000000 0
 133/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/caniuse-lite/data/features/speech-recognition.js499162500000000000 0
-110/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/dist/fullscreen-datetime-picker.js.map1631989365748631373 0
+110/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/dist/fullscreen-datetime-picker.js.map1632051709298068311 0
 116/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/caniuse-lite/data/regions/CF.js499162500000000000 0
 116/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/core-js/features/regexp/test.js499162500000000000 0
 112/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/@parcel/fs/src/OverlayFS.js499162500000000000 0
@@ -8018,7 +8018,7 @@
 96/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/unset-value1632051469955892210 1
 121/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/highlight.js/lib/languages/maxima.js499162500000000000 0
 128/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/@babel/types/lib/converters/toExpression.js456789000000000000 0
-106/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/dist/fullscreen-datetime-picker.js1631989365746631350 0
+106/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/dist/fullscreen-datetime-picker.js1632051709259096759 0
 111/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/@parcel/utils/src/.babelrc499162500000000000 0
 113/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/es-abstract/2019/MakeTime.js499162500000000000 0
 119/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/@parcel/core/src/PackagerRunner.js499162500000000000 0
@@ -13870,7 +13870,7 @@
 116/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/caniuse-lite/data/regions/US.js499162500000000000 0
 104/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/esutils/lib/code.js499162500000000000 0
 113/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/request-promise-core/LICENSE499162500000000000 0
-84/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/package.json1631989361819586430 0
+84/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/package.json1632051787251209394 0
 131/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/highlight.js/scss/tomorrow-night-eighties.scss499162500000000000 0
 98/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/url/README.md1440689784000000000 0
 98/home/michaelarmani/Documents/projects/javascript/fullscreen-datepicker/node_modules/eventemitter31632051470458583775 1

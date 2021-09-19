@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "npx parcel",
+    "start": "npx parcel src/index.html",
     "dev": "npm run start",
     "watch": "npm run start",
-    "build": "npx parcel build"
+    "build": "npx parcel build src/scripts/index.js"
   },
   "source": "src/scripts/index.js",
   "main": "dist/fullscreen-datetime-picker.js",
