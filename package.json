@@ -6,9 +6,9 @@
     "start": "npx parcel src/index.html",
     "dev": "npm run start",
     "watch": "npm run start",
-    "build": "npx parcel build src/scripts/index.js"
+    "build": "npx parcel build src/scripts/datepicker.js"
   },
-  "source": "src/scripts/index.js",
+  "source": "src/scripts/datepicker.js",
   "main": "dist/fullscreen-datetime-picker.js",
   "keywords": [],
   "author": "Michael Armani",
