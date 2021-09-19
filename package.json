@@ -1,0 +1,19 @@
+{
+  "name": "fullscreen-datepicker",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "npx parcel",
+    "dev": "npm run start",
+    "watch": "npm run start",
+    "build": "npx parcel build"
+  },
+  "source": "src/scripts/index.js",
+  "main": "dist/fullscreen-datetime-picker.js",
+  "keywords": [],
+  "author": "Michael Armani",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.0.0-rc.0"
+  }
+}
