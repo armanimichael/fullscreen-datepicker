@@ -2,26 +2,38 @@ import { getMonthDays } from './date-utils';
 
 class Datepicker {
 	constructor(elemSelector, daySelector) {
-		this.rootElem = document.querySelector(elemSelector);
+		this.elemSelector = elemSelector;
 		this.daySelector = daySelector;
-		this.selectedDate = new Date();
+		this.currentDate = new Date();
+	}
+
+	get rootElem() {
+		return document.querySelector(this.elemSelector);
+	}
+
+	get templateDay() {
+		return document.querySelector(this.daySelector);
+	}
+
+	get dateElem() {
+		return document.querySelector(`${this.elemSelector} [type="date"]`);
 	}
 
 	highlightToday() {
 		const today = new Date();
 		const day = document.querySelector(`[day="${today.getDate()}"]`);
 
-		const isSameMonth = today.getMonth() === this.selectedDate.getMonth();
-		const isSameYear = today.getFullYear() === this.selectedDate.getFullYear();
+		const isSameMonth = today.getMonth() === this.currentDate.getMonth();
+		const isSameYear = today.getFullYear() === this.currentDate.getFullYear();
 		if (isSameMonth && isSameYear) {
 			day.classList.add('today');
 		}
 	}
 
 	createDays() {
-		const date = this.selectedDate;
+		const date = this.currentDate;
 		const days = getMonthDays(date.getFullYear(), date.getMonth());
-		const template = document.querySelector(this.daySelector);
+		const template = this.templateDay;
 
 		for (let day = 1; day <= days; day++) {
 			const dayElem = template.cloneNode(true);
@@ -48,6 +60,9 @@ class Datepicker {
 			oldSelected.removeAttribute('clicked');
 		}
 		targetDay.setAttribute('clicked', '');
+
+		const day = targetDay.getAttribute('day');
+		this.setDate(day);
 	}
 
 	createFormInput() {
@@ -59,13 +74,19 @@ class Datepicker {
 		this.rootElem.append(inputElem);
 	}
 
+	setDate(day) {
+		const year = this.currentDate.getFullYear();
+		const month = this.currentDate.getMonth().toString().padStart(2, 0);
+		const selectedDay = day.toString().padStart(2, 0);
+
+		this.dateElem.value = `${year}-${month}-${selectedDay}`;
+	}
+
 	init() {
 		this.createDays();
 		this.createFormInput();
 		this.initClickEvents();
 	}
-
-	value() {}
 }
 
 export { Datepicker };
