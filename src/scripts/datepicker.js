@@ -50,8 +50,18 @@ class Datepicker {
 		targetDay.setAttribute('clicked', '');
 	}
 
+	createFormInput() {
+		const inputName = this.rootElem.getAttribute('name');
+		const inputElem = document.createElement('input');
+		inputElem.setAttribute('type', 'date');
+		inputElem.setAttribute('name', inputName || '');
+		inputElem.style.display = 'none';
+		this.rootElem.append(inputElem);
+	}
+
 	init() {
 		this.createDays();
+		this.createFormInput();
 		this.initClickEvents();
 	}
 
