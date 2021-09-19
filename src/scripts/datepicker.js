@@ -3,7 +3,7 @@ import { getMonthDays } from './date-utils';
 class Datepicker {
 	constructor(elemSelector, daySelector) {
 		this.rootElem = document.querySelector(elemSelector);
-		this.dayElem = document.querySelector(daySelector);
+		this.daySelector = daySelector;
 		this.selectedDate = new Date();
 	}
 
@@ -21,18 +21,38 @@ class Datepicker {
 	createDays() {
 		const date = this.selectedDate;
 		const days = getMonthDays(date.getFullYear(), date.getMonth());
+		const template = document.querySelector(this.daySelector);
 
 		for (let day = 1; day <= days; day++) {
-			const dayElem = this.dayElem.cloneNode(true);
+			const dayElem = template.cloneNode(true);
 			dayElem.innerText = day;
 			dayElem.setAttribute('day', day);
 			this.rootElem.append(dayElem);
 		}
+		template.remove();
 		this.highlightToday();
+	}
+
+	initClickEvents() {
+		document.addEventListener('click', ({ target }) => {
+			const selectedDay = target.getAttribute('day');
+			if (selectedDay) {
+				this.dayClick(target);
+			}
+		});
+	}
+
+	dayClick(targetDay) {
+		const oldSelected = document.querySelector(`${this.daySelector}[clicked]`);
+		if (oldSelected && oldSelected !== targetDay) {
+			oldSelected.removeAttribute('clicked');
+		}
+		targetDay.setAttribute('clicked', '');
 	}
 
 	init() {
 		this.createDays();
+		this.initClickEvents();
 	}
 
 	value() {}
