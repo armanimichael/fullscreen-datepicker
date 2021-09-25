@@ -5,5 +5,12 @@ const datepicker = new Datepicker(
 	'.day',
 	'.current-month'
 );
-datepicker.setLocale('it-IT');
-datepicker.init();
+datepicker.setLocale('it');
+datepicker.setNavigationButtons('.prev', '.next');
+
+const currentDateParam = new URLSearchParams(location.search).get('some-date');
+let currentDate;
+if (currentDateParam) {
+	currentDate = new Date(currentDateParam);
+}
+datepicker.init(currentDate);

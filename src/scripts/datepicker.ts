@@ -8,6 +8,8 @@ class Datepicker {
 	private daySelector: string;
 	private currentDate: Date;
 	private locale: string = 'en-US';
+	private prevSelector = '.prev-month';
+	private nextSelector = '.next-month';
 
 	constructor(
 		rootSelector: string = '.fullscreen-datetime-picker',
@@ -36,6 +38,14 @@ class Datepicker {
 		return document.querySelector(`${this.monthSelector}`);
 	}
 
+	get prevButton(): HTMLElement {
+		return document.querySelector(this.prevSelector);
+	}
+
+	get nextButton(): HTMLElement {
+		return document.querySelector(this.nextSelector);
+	}
+
 	private highlightToday() {
 		const today = new Date();
 		const day = document.querySelector(`[day="${today.getDate()}"]`);
@@ -58,15 +68,41 @@ class Datepicker {
 			dayElem.setAttribute('day', day.toString());
 			this.rootElem.append(dayElem);
 		}
-		template.remove();
 		this.highlightToday();
+	}
+
+	private clearDays() {
+		const days = document.querySelectorAll('[day]');
+		days.forEach(day => {
+			day.remove();
+		});
+	}
+
+	private handleNavigationButtons(target: HTMLElement) {
+		const currentMonth = this.currentDate.getMonth();
+		let increment = 1;
+		if (target === this.prevButton) {
+			increment = -1;
+		}
+
+		this.currentDate.setMonth(currentMonth + increment);
+		this.clearDays();
+		this.updateDate();
 	}
 
 	private initClickEvents() {
 		document.addEventListener('click', ({ target }) => {
-			const selectedDay = (target as HTMLElement).getAttribute('day');
+			const targetElem = target as HTMLElement;
+
+			// Set clicked day
+			const selectedDay = targetElem.getAttribute('day');
 			if (selectedDay) {
 				this.dayClick(target);
+			}
+
+			// Set current month
+			if (targetElem === this.prevButton || targetElem === this.nextButton) {
+				this.handleNavigationButtons(targetElem);
 			}
 		});
 	}
@@ -100,10 +136,12 @@ class Datepicker {
 	}
 
 	private setCurrentMonthName() {
-		const monthName = this.currentDate.toLocaleString(this.locale, {
+		let monthName = this.currentDate.toLocaleString(this.locale, {
 			month: 'long',
 		});
-		this.currentMonthElem.innerText = capitalize(monthName);
+
+		monthName = capitalize(monthName);
+		this.currentMonthElem.innerText = `${monthName} ${this.currentDate.getFullYear()}`;
 	}
 
 	public setLocale(locale: string) {
@@ -113,6 +151,16 @@ class Datepicker {
 		}
 
 		this.locale = locale;
+	}
+
+	private updateDate() {
+		this.createDays();
+		this.setCurrentMonthName();
+	}
+
+	public setNavigationButtons(prevSelector: string, nextSelector: string) {
+		this.prevSelector = prevSelector;
+		this.nextSelector = nextSelector;
 	}
 
 	public init(currentDate: Date | null = null) {
