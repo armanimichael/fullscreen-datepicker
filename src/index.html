@@ -8,13 +8,17 @@
     <title>Fullscreen Date Picker</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="./scripts/index.js" defer type="module"></script>
+    <script src="./scripts/index.ts" defer type="module"></script>
 </head>
 
 <body>
-    <div class="fullscreen-datetime-picker" name="some-date">
-        <div class="day"></div>
-    </div>
+    <form action="/" method="GET">
+        <div class="fullscreen-datetime-picker" name="some-date">
+            <p class="current-month">Month</p>
+            <div class="day"></div>
+        </div>
+        <button type="submit">Send</button>
+    </form>
 </body>
 
 </html>
