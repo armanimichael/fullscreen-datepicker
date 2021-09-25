@@ -129,7 +129,7 @@ class Datepicker {
 
 	private setDate(day: number) {
 		const year = this.currentDate.getFullYear();
-		const month = this.currentDate.getMonth().toString().padStart(2, '0');
+		const month = (this.currentDate.getMonth() + 1).toString().padStart(2, '0');
 		const selectedDay = day.toString().padStart(2, '0');
 
 		this.dateElem.setAttribute('value', `${year}-${month}-${selectedDay}`);
@@ -169,6 +169,7 @@ class Datepicker {
 		this.createFormInput();
 		this.initClickEvents();
 		this.setCurrentMonthName();
+		this.setDate(1);
 		this.initialized = true;
 	}
 }
