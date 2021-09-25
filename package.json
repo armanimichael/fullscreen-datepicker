@@ -9,7 +9,7 @@
     "build": "npx parcel build"
   },
   "source": "src/scripts/lib.js",
-  "browser": "dist/fullscreen-datetime-picker.min.js",
+  "browser": "dist/fullscreen-datepicker.min.js",
   "targets": {
     "browser": {
       "includeNodeModules": true,

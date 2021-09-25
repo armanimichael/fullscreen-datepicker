@@ -1,3 +1,3 @@
 import { Datepicker } from './datepicker';
 
-window.Datepicker = Datepicker;
+window.FullscreenDatePicker = Datepicker;
