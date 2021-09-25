@@ -6,10 +6,17 @@
     "start": "npx parcel src/index.html",
     "dev": "npm run start",
     "watch": "npm run start",
-    "build": "npx parcel build src/scripts/datepicker.js"
+    "build": "npx parcel build"
   },
-  "source": "src/scripts/datepicker.js",
-  "main": "dist/fullscreen-datetime-picker.js",
+  "source": "src/scripts/lib.js",
+  "browser": "dist/fullscreen-datetime-picker.min.js",
+  "targets": {
+    "browser": {
+      "includeNodeModules": true,
+      "optimize": true
+    }
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "keywords": [],
   "author": "Michael Armani",
   "license": "ISC",
