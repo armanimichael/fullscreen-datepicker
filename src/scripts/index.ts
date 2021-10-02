@@ -7,6 +7,7 @@ const datepicker = new Datepicker(
 );
 datepicker.setLocale('it');
 datepicker.setNavigationButtons('.prev', '.next');
+datepicker.showWeekdays();
 
 const currentDateParam = new URLSearchParams(location.search).get('some-date');
 let currentDate;

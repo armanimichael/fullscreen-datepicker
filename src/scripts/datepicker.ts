@@ -1,5 +1,6 @@
 import { getMonthDays } from './date-utils';
 import { capitalize } from './string-utils';
+import { Weekday } from './weekday';
 
 class Datepicker {
 	private initialized: boolean = false;
@@ -10,6 +11,8 @@ class Datepicker {
 	private locale: string = 'en-US';
 	private prevSelector = '.prev-month';
 	private nextSelector = '.next-month';
+	private beginningWeekDay = Weekday.Sunday;
+	private visibleWeekDays = false;
 
 	constructor(
 		rootSelector: string = '.fullscreen-datetime-picker',
@@ -57,23 +60,72 @@ class Datepicker {
 		}
 	}
 
+	private createDaysHtmlElements(
+		startingDay: number,
+		days: number,
+		isPreviousMonth: boolean = false
+	) {
+		const template = this.dayTemplateElem;
+
+		for (let day = startingDay; day <= days; day++) {
+			const dayElem = template.cloneNode(true) as HTMLElement;
+			dayElem.innerText = day.toString();
+
+			if (isPreviousMonth) {
+				dayElem.classList.add('previous-month-day');
+			} else {
+				dayElem.setAttribute('day', day.toString());
+			}
+
+			this.rootElem.append(dayElem);
+		}
+	}
+
+	private createPreviousMonthDays() {
+		const date = new Date(this.currentDate.getTime());
+		date.setDate(1);
+		const weekDay = date.getDay();
+
+		// First day of the month correspond to starting day
+		if (weekDay === this.beginningWeekDay) {
+			return;
+		}
+
+		// Get previous month
+		date.setMonth(date.getMonth() - 1);
+		const daysInMonth = getMonthDays(date.getFullYear(), date.getMonth());
+		date.setDate(daysInMonth);
+
+		let day = date.getDay();
+
+		for (let i = 1; day !== this.beginningWeekDay; i++) {
+			date.setDate(daysInMonth - i);
+			day = date.getDay();
+		}
+
+		this.createDaysHtmlElements(date.getDate(), daysInMonth, true);
+	}
+
 	private createDays() {
 		const date = this.currentDate;
 		const days = getMonthDays(date.getFullYear(), date.getMonth());
-		const template = this.dayTemplateElem;
 
-		for (let day = 1; day <= days; day++) {
-			const dayElem = template.cloneNode(true) as HTMLElement;
-			dayElem.innerText = day.toString();
-			dayElem.setAttribute('day', day.toString());
-			this.rootElem.append(dayElem);
+		if (this.visibleWeekDays) {
+			this.createPreviousMonthDays();
 		}
+
+		this.createDaysHtmlElements(1, days);
 		this.highlightToday();
 	}
 
 	private clearDays() {
 		const days = document.querySelectorAll('[day]');
+		const lastMonthDays = document.querySelectorAll('.previous-month-day');
 		days.forEach(day => {
+			day.remove();
+		});
+
+		lastMonthDays.forEach(day => {
 			day.remove();
 		});
 	}
@@ -161,6 +213,20 @@ class Datepicker {
 	public setNavigationButtons(prevSelector: string, nextSelector: string) {
 		this.prevSelector = prevSelector;
 		this.nextSelector = nextSelector;
+	}
+
+	public showWeekdays(beginningWeekDay?: Weekday) {
+		if (this.initialized) {
+			console.error(
+				'You can only set weekdays visibility before calling init()!'
+			);
+			return;
+		}
+
+		if (beginningWeekDay) {
+			this.beginningWeekDay = beginningWeekDay;
+		}
+		this.visibleWeekDays = true;
 	}
 
 	public init(currentDate: Date | null = null) {
