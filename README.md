@@ -51,6 +51,7 @@ Html example:
 
 </html>
 ```
+
 JavaScript example:
 
 ```
@@ -77,19 +78,27 @@ document.addEventListener("DOMContentLoaded", () => {
 ## Configuration
 
 The constructor (`FullscreenDatePicker`) accepts three **optional** parameters:
+
 - `rootSelector` (default: `'.fullscreen-datetime-picker'`): where to mount the datepicker;
 - `daySelector` (default: `'.day'`): what to use as a template for the calendar days;
 - `monthSelector` (default: `'.current-month'`): where to set the current month name and year;
 
 ### Setting the locale
+
 **You must run it before `init()`**
 
 `setLocale(locale)`: where locale is a string (default: `'en-US'`).
+
+### Showing days of the week
+
+**You must run it before `init()`**
+
+`showWeekdays(weekDaySelector, rootSelector, beginningWeekDay)`: accepts three **optional** parameters: - `weekDaySelector` (default: `.week-day`): week day template element; - `rootSelector` (default `.week-days`): where to mount the days elements; - `beginningWeekDay` (default `1`, which is Monday): which day to count from
 
 ### Setting the navigation buttons
 
 `setNavigationButtons(prevSelector, nextSelector)`: the buttons selectors for previous and next month (default: `'.prev-month', '.next-month'`)
 
 ### Initialize
-`init(date)`: where date is the starting date (default: today date).
 
+`init(date)`: where date is the starting date (default: today date).
