@@ -13,8 +13,10 @@ class Datepicker {
 	private nextSelector = '.next-month';
 	private beginningWeekDay = Weekday.Monday;
 	private currentBeginningWeekDay = 1;
+	private isBeginningDayThisMonth: boolean = false;
 	private visibleWeekDays = false;
 	private weekDaySelector: string;
+	private weekDaysRootSelector: string;
 
 	constructor(
 		rootSelector: string = '.fullscreen-datetime-picker',
@@ -29,6 +31,10 @@ class Datepicker {
 
 	get rootElem(): HTMLElement {
 		return document.querySelector(this.rootSelector);
+	}
+
+	get weekDaysRootElem(): HTMLElement {
+		return document.querySelector(this.weekDaysRootSelector);
 	}
 
 	get dayTemplateElem(): HTMLElement {
@@ -87,7 +93,28 @@ class Datepicker {
 		}
 	}
 
-	private createWeekDays() {}
+	private createWeekDays() {
+		let date = new Date(this.currentDate.getTime());
+		date.setDate(this.currentBeginningWeekDay);
+		if (!this.isBeginningDayThisMonth) {
+			date.setMonth(date.getMonth() - 1);
+		}
+
+		const template = this.weekDayTemplateElem;
+		let day = date.getDate();
+
+		for (let i = 0; i < 7; i++) {
+			const weekDayElem = template.cloneNode(true) as HTMLElement;
+			const dayName = date.toLocaleString(this.locale, {
+				weekday: 'long',
+			});
+			weekDayElem.innerText = dayName;
+			weekDayElem.setAttribute('weekday', date.getDay().toString());
+			this.weekDaysRootElem.append(weekDayElem);
+			date.setDate(day + 1);
+			day = date.getDate();
+		}
+	}
 
 	private createPreviousMonthDays() {
 		const date = new Date(this.currentDate.getTime());
@@ -96,6 +123,7 @@ class Datepicker {
 
 		// First day of the month correspond to starting day
 		if (weekDay === this.beginningWeekDay) {
+			this.isBeginningDayThisMonth = true;
 			return;
 		}
 
@@ -111,7 +139,8 @@ class Datepicker {
 			day = date.getDay();
 		}
 
-		this.currentBeginningWeekDay = day;
+		this.currentBeginningWeekDay = date.getDate();
+		this.isBeginningDayThisMonth = false;
 		this.createDaysHtmlElements(date.getDate(), daysInMonth, true);
 	}
 
@@ -130,6 +159,7 @@ class Datepicker {
 	private clearDays() {
 		const days = document.querySelectorAll('[day]');
 		const lastMonthDays = document.querySelectorAll('.previous-month-day');
+
 		days.forEach(day => {
 			day.remove();
 		});
@@ -225,7 +255,8 @@ class Datepicker {
 	}
 
 	public showWeekdays(
-		weekDaySelector = 'week-day',
+		weekDaySelector = '.week-day',
+		rootSelector = '.week-days',
 		beginningWeekDay?: Weekday
 	) {
 		if (this.initialized) {
@@ -240,15 +271,19 @@ class Datepicker {
 		}
 		this.visibleWeekDays = true;
 		this.weekDaySelector = weekDaySelector;
+		this.weekDaysRootSelector = rootSelector;
 	}
 
 	public init(currentDate: Date | null = null) {
 		this.currentDate = currentDate ?? this.currentDate;
-		this.createDays();
 		this.createFormInput();
+		this.createDays();
 		this.initClickEvents();
 		this.setCurrentMonthName();
 		this.setDate(1);
+		if (this.visibleWeekDays) {
+			this.createWeekDays();
+		}
 		this.initialized = true;
 	}
 }
