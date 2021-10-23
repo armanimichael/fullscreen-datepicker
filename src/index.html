@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Fullscreen Date Picker</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+			crossorigin="anonymous"
+		/>
+		<script src="./scripts/index.ts" defer type="module"></script>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullscreen Date Picker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="./scripts/index.ts" defer type="module"></script>
-</head>
-
-<body>
-    <form action="/" method="GET">
-        <div class="fullscreen-datetime-picker" name="some-date">
-            <p class="current-month">Month</p>
-            <button type="button" class='prev'>Prev</button>
-            <button type="button" class='next'>Next</button>
-            <div class="day"></div>
-        </div>
-        <button type="submit">Send</button>
-    </form>
-</body>
-
+	<body>
+		<form action="/" method="GET">
+			<div class="fullscreen-datetime-picker" name="some-date">
+				<p class="current-month">Month</p>
+				<button type="button" class="prev">Prev</button>
+				<button type="button" class="next">Next</button>
+				<div class="week-day"></div>
+				<div class="day"></div>
+			</div>
+			<button type="submit">Send</button>
+		</form>
+	</body>
 </html>

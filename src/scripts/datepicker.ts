@@ -11,8 +11,10 @@ class Datepicker {
 	private locale: string = 'en-US';
 	private prevSelector = '.prev-month';
 	private nextSelector = '.next-month';
-	private beginningWeekDay = Weekday.Sunday;
+	private beginningWeekDay = Weekday.Monday;
+	private currentBeginningWeekDay = 1;
 	private visibleWeekDays = false;
+	private weekDaySelector: string;
 
 	constructor(
 		rootSelector: string = '.fullscreen-datetime-picker',
@@ -31,6 +33,10 @@ class Datepicker {
 
 	get dayTemplateElem(): HTMLElement {
 		return document.querySelector(this.daySelector);
+	}
+
+	get weekDayTemplateElem(): HTMLElement {
+		return document.querySelector(this.weekDaySelector);
 	}
 
 	get dateElem(): HTMLElement {
@@ -81,6 +87,8 @@ class Datepicker {
 		}
 	}
 
+	private createWeekDays() {}
+
 	private createPreviousMonthDays() {
 		const date = new Date(this.currentDate.getTime());
 		date.setDate(1);
@@ -103,6 +111,7 @@ class Datepicker {
 			day = date.getDay();
 		}
 
+		this.currentBeginningWeekDay = day;
 		this.createDaysHtmlElements(date.getDate(), daysInMonth, true);
 	}
 
@@ -215,7 +224,10 @@ class Datepicker {
 		this.nextSelector = nextSelector;
 	}
 
-	public showWeekdays(beginningWeekDay?: Weekday) {
+	public showWeekdays(
+		weekDaySelector = 'week-day',
+		beginningWeekDay?: Weekday
+	) {
 		if (this.initialized) {
 			console.error(
 				'You can only set weekdays visibility before calling init()!'
@@ -227,6 +239,7 @@ class Datepicker {
 			this.beginningWeekDay = beginningWeekDay;
 		}
 		this.visibleWeekDays = true;
+		this.weekDaySelector = weekDaySelector;
 	}
 
 	public init(currentDate: Date | null = null) {
